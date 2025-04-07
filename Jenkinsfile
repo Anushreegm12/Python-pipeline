@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/anushreegm12/python-pipeline.git'  
+                git url: 'https://github.com/anushreegm12/python-pipeline.git', branch: 'main'
             }
         }
 
