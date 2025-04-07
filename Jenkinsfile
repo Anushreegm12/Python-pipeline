@@ -53,6 +53,7 @@ pipeline {
                 sh 'kubectl rollout status deployment/python-app --timeout=300s'
             }
         }
+    }
 
     post {
         success {
