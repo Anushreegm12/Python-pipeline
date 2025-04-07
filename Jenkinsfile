@@ -12,7 +12,7 @@ pipeline {
             }
         }
 
-        stage('Package App (ZIP - optional)') {
+        stage('Package App') {
             steps {
                 sh 'zip -r app.zip . -x "*.git*"'
             }
@@ -45,6 +45,21 @@ pipeline {
                 sh 'kubectl get services'
             }
         }
+        
+        stage('Scale Up') {
+            steps{
+                kubectl scale deployment python-app --replicas=3
+                sh 'kubectl get pods'
+            }
+        }
+
+        stage('Scale Down') {
+            steps {
+                kubectl scale deployment python-app --replicas=1
+                sh 'kubect get pods'
+            }
+        }
+        
     }
 
     post {
