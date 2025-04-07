@@ -24,17 +24,11 @@ pipeline {
             }
         }
 
-        stage('Login to DockerHub') {
+        stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', url: '')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
+                    sh 'docker push $DOCKER_IMAGE'
                 }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                sh 'docker push $DOCKER_IMAGE'
             }
         }
 
