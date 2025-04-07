@@ -54,16 +54,6 @@ pipeline {
             }
         }
 
-        stage('Scale Down') {
-            steps {
-                sh 'kubectl scale deployment python-app --replicas=1'
-                sh 'kubect get pods'
-                sh 'kubectl rollout status deployment/python-app --timeout=300s'
-            }
-        }
-        
-    }
-
     post {
         success {
             echo '🎉 Deployment successful!'
