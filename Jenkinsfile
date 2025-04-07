@@ -48,14 +48,14 @@ pipeline {
         
         stage('Scale Up') {
             steps{
-                kubectl scale deployment python-app --replicas=3
+                sh 'kubectl scale deployment python-app --replicas=3'
                 sh 'kubectl get pods'
             }
         }
 
         stage('Scale Down') {
             steps {
-                kubectl scale deployment python-app --replicas=1
+                sh 'kubectl scale deployment python-app --replicas=1'
                 sh 'kubect get pods'
             }
         }
