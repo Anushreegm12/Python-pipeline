@@ -50,6 +50,8 @@ pipeline {
             steps{
                 sh 'kubectl scale deployment python-app --replicas=3'
                 sh 'kubectl get pods'
+                echo 'Waiting 4 minutes for pods to initialize and stabilize...'
+                sleep time: 4, unit: 'MINUTES'
             }
         }
 
@@ -57,6 +59,7 @@ pipeline {
             steps {
                 sh 'kubectl scale deployment python-app --replicas=1'
                 sh 'kubect get pods'
+                sleep time: 4, unit: 'MINUTES'
             }
         }
         
